@@ -1,7 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const User = require('./controllers/user');
+const User = require('./controllers/users');
+const errors = require('./controllers/middlewares/domain-error');
 
 const app = express();
 app.use(bodyParser.json());
@@ -12,5 +13,6 @@ app.get('/', (_request, response) => {
 });
 
 app.use('/user', User);
+app.use(errors);
 
 module.exports = app;
