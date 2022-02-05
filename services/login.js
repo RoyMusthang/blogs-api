@@ -5,7 +5,7 @@ const login = async (data) => {
   const { email, password } = data;
   const token = jwt.sign({ email });
 
-  const user = await User.findOne({ where: {email} });
+  const user = await User.findOne({ where: { email } });
   if (!user || password !== user.password) {
     const error = new Error();
     error.code = 400;
