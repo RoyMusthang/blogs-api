@@ -19,7 +19,6 @@ const create = async (user) => {
 
   const token = jwt.sign({ displayName });
 
-  console.log(token)
   return token;
 };
 
