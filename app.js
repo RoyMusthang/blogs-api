@@ -1,7 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const User = require('./controllers/users');
+const user = require('./controllers/users');
+const login = require('./controllers/login');
 const errors = require('./controllers/middlewares/domain-error');
 
 const app = express();
@@ -12,7 +13,8 @@ app.get('/', (_request, response) => {
   response.send();
 });
 
-app.use('/user', User);
+app.use('/user', user);
+app.use('/login', login);
 app.use(errors);
 
 module.exports = app;
