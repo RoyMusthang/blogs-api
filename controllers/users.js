@@ -11,12 +11,14 @@ router.get('/',
   rescue(async (req, res) => {
     const { authorization } = req.headers;
     const users = await userService.getAll(authorization);
+    res.status(200).json(users);
+  }));
 
-    if (users.message) {
- return res.status(users.code).json({
-      message: users.message,
-    }); 
-}
+router.get('/:id',
+  rescue(async (req, res) => {
+    const { id } = req.params;
+    const { authorization } = req.headers;
+    const users = await userService.getById(authorization, id);
     res.status(200).json(users);
   }));
 
