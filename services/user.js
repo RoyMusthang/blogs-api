@@ -20,7 +20,7 @@ const checkingToken = async (token) => {
     throw error;
   }
   jwt.verify(token);
-}
+};
 
 const getAll = async (auth) => {
   await checkingToken(auth);

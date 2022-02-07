@@ -12,12 +12,13 @@ router.get('/',
     const { authorization } = req.headers;
     const users = await userService.getAll(authorization);
 
-    if (users.message) return res.status(users.code).json({
-      message: users.message
-    });
+    if (users.message) {
+ return res.status(users.code).json({
+      message: users.message,
+    }); 
+}
     res.status(200).json(users);
-  })
-)
+  }));
 
 router.post('/',
   validateName,
