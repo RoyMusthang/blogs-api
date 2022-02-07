@@ -12,6 +12,11 @@ const emailValid = async (user) => {
   }
 };
 
+const getAll = async () => {
+  const users = await User.findAll();
+  return users;
+}
+
 const create = async (user) => {
   const { displayName } = user;
   await emailValid(user);
@@ -22,4 +27,7 @@ const create = async (user) => {
   return token;
 };
 
-module.exports = { create };
+module.exports = {
+  create,
+  getAll,
+};
