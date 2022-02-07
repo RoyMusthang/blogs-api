@@ -12,10 +12,21 @@ const emailValid = async (user) => {
   }
 };
 
-const getAll = async () => {
+const checkingToken = async (token) => {
+  if (!token) {
+    const error = new Error();
+    error.code = 401;
+    error.message = 'Token not found';
+    throw error;
+  }
+  jwt.verify(token);
+}
+
+const getAll = async (auth) => {
+  await checkingToken(auth);
   const users = await User.findAll();
   return users;
-}
+};
 
 const create = async (user) => {
   const { displayName } = user;

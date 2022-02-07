@@ -11,7 +11,7 @@ router.post('/',
   rescue(async (req, res) => {
     const user = req.body;
     const userLogin = await LoginService.login(user);
-    res.status(200).json(userLogin);
+    res.status(200).json({ token: userLogin });
   }));
 
 module.exports = router;
