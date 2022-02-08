@@ -5,6 +5,13 @@ const {
 } = require('./middlewares/validations');
 const categoriesService = require('../services/categories');
 
+router.get('/',
+  rescue(async (req, res) => {
+    const auth = req.headers.authorization;
+    const categories = await categoriesService.getAll(auth);
+    res.status(200).json(categories);
+  }))
+
 router.post('/',
   validateName,
   rescue(async (req, res) => {
