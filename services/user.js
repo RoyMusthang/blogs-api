@@ -38,7 +38,7 @@ const getById = async (auth, id) => {
     throw error;
   }
   return user;
-}
+};
 
 const create = async (user) => {
   const { displayName } = user;
