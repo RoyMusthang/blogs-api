@@ -19,6 +19,9 @@ router.get('/:id',
     const { id } = req.params;
     const { authorization } = req.headers;
     const users = await userService.getById(authorization, id);
+    if (users.message) {
+      return res.status(users.code).json(users.message)
+    }
     res.status(200).json(users);
   }));
 

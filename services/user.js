@@ -28,6 +28,18 @@ const getAll = async (auth) => {
   return users;
 };
 
+const getById = async (auth, id) => {
+  await checkingToken(auth);
+  const user = await User.findByPk(id);
+  if (!user) {
+    const error = new Error();
+    error.code = 404;
+    error.message = 'User does not exist';
+    throw error;
+  }
+  return user;
+}
+
 const create = async (user) => {
   const { displayName } = user;
   await emailValid(user);
@@ -41,4 +53,5 @@ const create = async (user) => {
 module.exports = {
   create,
   getAll,
+  getById,
 };
