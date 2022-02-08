@@ -10,7 +10,7 @@ router.get('/',
     const auth = req.headers.authorization;
     const categories = await categoriesService.getAll(auth);
     res.status(200).json(categories);
-  }))
+  }));
 
 router.post('/',
   validateName,

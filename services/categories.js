@@ -11,6 +11,12 @@ const checkingToken = async (token) => {
   jwt.verify(token);
 };
 
+const getAll = async (auth) => {
+  await checkingToken(auth);
+  const categories = await Categories.findAll();
+  return categories;
+};
+
 const create = async (name, auth) => {
   await checkingToken(auth);
   const categories = await Categories.create({ name });
@@ -19,4 +25,5 @@ const create = async (name, auth) => {
 
 module.exports = {
   create,
+  getAll,
 };
