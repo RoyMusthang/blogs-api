@@ -1,6 +1,6 @@
 const emailRegex = /\S+@\S+\.\S+/;
 
-const validateName = (req, res, next) => {
+const validateDisplayName = (req, res, next) => {
   const { displayName } = req.body;
 
   if (!displayName || displayName.length < 8) {
@@ -11,6 +11,12 @@ const validateName = (req, res, next) => {
 
   next();
 };
+
+const validateName = async (req, res, next) => {
+  const { name } = req.body;
+  if (!name) return res.status(400).json({ message: '"name" is required' })
+  next();
+}
 
 const validateEmail = async (req, res, next) => {
   const { email } = req.body;
@@ -60,14 +66,15 @@ const validateLogin = (req, res, next) => {
 
 const validateCategorie = (req, res, next) => {
   const { name } = req.body;
-  if (!name) return res.status(400).json({ message: '"name" is required' })
+  if (!name) return res.status(400).json({ message: '"name" is required' });
   next();
-}
+};
 
 module.exports = {
-  validateName,
+  validateDisplayName,
   validateEmail,
   validatePassword,
   validateLogin,
   validateCategorie,
+  validateName,
 }; 

@@ -1,7 +1,7 @@
 const rescue = require('express-rescue');
 const router = require('express').Router();
 const {
-  validateName,
+  validateDisplayName,
   validateEmail,
   validatePassword,
 } = require('./middlewares/validations');
@@ -20,13 +20,13 @@ router.get('/:id',
     const { authorization } = req.headers;
     const users = await userService.getById(authorization, id);
     if (users.message) {
-      return res.status(users.code).json(users.message)
+      return res.status(users.code).json(users.message);
     }
     res.status(200).json(users);
   }));
 
 router.post('/',
-  validateName,
+  validateDisplayName,
   validateEmail,
   validatePassword,
   rescue(async (req, res) => {

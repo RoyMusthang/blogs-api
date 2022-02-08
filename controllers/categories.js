@@ -2,14 +2,17 @@ const rescue = require('express-rescue');
 const router = require('express').Router();
 const {
   validateCategorie,
+  validateName,
 } = require('./middlewares/validations');
-const categoriesService = require('../services/categorie');
+const categoriesService = require('../services/categories');
 
 router.post('/',
   validateCategorie,
+  validateName,
   rescue(async (req, res) => {
-    const categorie = req.body;
-    const newCategorie = await categoriesService.create(categorie);
+    const { name } = req.body;
+    const auth = req.headers.authorization;
+    const newCategorie = await categoriesService.create(name, auth);
     res.status(201).json(newCategorie);
   }));
 
