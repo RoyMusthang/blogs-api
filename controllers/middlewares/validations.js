@@ -14,9 +14,9 @@ const validateDisplayName = (req, res, next) => {
 
 const validateName = async (req, res, next) => {
   const { name } = req.body;
-  if (!name) return res.status(400).json({ message: '"name" is required' })
+  if (!name) return res.status(400).json({ message: '"name" is required' });
   next();
-}
+};
 
 const validateEmail = async (req, res, next) => {
   const { email } = req.body;
@@ -64,17 +64,10 @@ const validateLogin = (req, res, next) => {
   next();
 };
 
-const validateCategorie = (req, res, next) => {
-  const { name } = req.body;
-  if (!name) return res.status(400).json({ message: '"name" is required' });
-  next();
-};
-
 module.exports = {
   validateDisplayName,
   validateEmail,
   validatePassword,
   validateLogin,
-  validateCategorie,
   validateName,
 }; 
