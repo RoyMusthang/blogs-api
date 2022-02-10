@@ -41,11 +41,11 @@ const getById = async (auth, id) => {
 };
 
 const create = async (user) => {
-  const { displayName } = user;
+  const { email } = user;
   await emailValid(user);
-  await User.create(user);
-
-  const token = jwt.sign({ displayName });
+  const users = await User.create(user);
+  const { id } = users;
+  const token = jwt.sign({ email, id });
 
   return token;
 };
