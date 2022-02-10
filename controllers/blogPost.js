@@ -5,6 +5,13 @@ const {
 } = require('./middlewares/validations');
 const blogPostService = require('../services/blogPosts');
 
+router.get('/',
+  rescue(async (req, res) => {
+    const auth = req.headers.authorization;
+    const allPosts = await blogPostService.getAll(auth);
+    res.status(200).json(allPosts);
+  }));
+
 router.post('/',
   validatePost,
   rescue(async (req, res) => {
